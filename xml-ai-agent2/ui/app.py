@@ -1,6 +1,12 @@
-import streamlit as st
+import os, sys
+
+# Ensure we can import from project root
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from modules.xml_cleaner import clean_xml
 from modules.excel_builder import generate_excel_report, save_report
+import streamlit as st
+
 
 st.title("🧠 XML Smart Cleaner & Tracker")
 
