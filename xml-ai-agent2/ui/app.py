@@ -1,10 +1,15 @@
-import os, sys
+import os, sys, inspect
 
-# Ensure we can import from project root
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# Ensure root directory is in Python path (works in Streamlit)
+current_file = os.path.abspath(inspect.getfile(inspect.currentframe()))
+project_root = os.path.abspath(os.path.join(os.path.dirname(current_file), ".."))
 
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+# Now safe to import
 from modules.xml_cleaner import clean_xml
-from modules.excel_builder import generate_excel_report, save_report
+from modules.excel_builder import generate_excel_report, save_report_to_excel
 import streamlit as st
 
 
@@ -28,3 +33,4 @@ if uploaded:
 
             st.success("Report Ready!👇")
             st.download_button("📥 Download Excel", excel_buffer, filename, mime="application/vnd.ms-excel")
+
