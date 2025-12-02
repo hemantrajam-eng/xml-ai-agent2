@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 project_root = os.path.abspath(os.path.join(current_dir, ".."))
 
 if project_root not in sys.path:
-    sys.path.insert(0, project_root)import os, sys, inspect
+    sys.path.insert(0, project_root)
 
 # Now safe to import
 from modules.xml_cleaner import clean_xml
@@ -35,5 +35,6 @@ if uploaded:
 
             st.success("Report Ready!👇")
             st.download_button("📥 Download Excel", excel_buffer, filename, mime="application/vnd.ms-excel")
+
 
 
