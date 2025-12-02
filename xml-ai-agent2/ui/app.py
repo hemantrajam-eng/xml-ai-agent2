@@ -1,11 +1,9 @@
-import os, sys, inspect
+import os, inspect
+import sys
+from pathlib import Path
 
-# --- Fix Python path so Streamlit can find modules regardless of run location ---
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-project_root = os.path.abspath(os.path.join(current_dir, ".."))
-
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+# Add the parent directory (my_project) to the system path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # Now safe to import
 from modules.xml_cleaner import clean_xml
@@ -35,6 +33,7 @@ if uploaded:
 
             st.success("Report Ready!👇")
             st.download_button("📥 Download Excel", excel_buffer, filename, mime="application/vnd.ms-excel")
+
 
 
 
